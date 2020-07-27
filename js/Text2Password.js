@@ -1,5 +1,3 @@
-
-
 ; (function (name, definition) {
     if (typeof define === 'function') {
         define(definition);
