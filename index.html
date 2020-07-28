@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <header>
-        <logo></logo>
-        <menu></menu>
-    </header>
-    <main></main>
-    <footer></footer>
+    <div id="app">
+        <child @test-event="testEvent"></child>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+
+    <script>
+        var eventHub = new Vue({});
+        Vue.mixin({
+            data: function () {
+                return {
+                    eventHub: eventHub
+                }
+            }
+        })
+        var vm = new Vue({
+            el: "#app",
+            components: {
+                child: {
+                    template: "<div><button @click='emitTestEvent'>按钮</button><button @click='delMe'>销毁</button></div>",
+                    methods: {
+                        emitTestEvent() {
+                            console.log("me-click")
+                            this.eventHub.$emit("test-event");
+                            this.$emit("test-event");
+                           
+                        },
+                        delMe() {
+                            this.$destroy();
+                        },
+
+                    },
+                    beforeDestroy() {
+                      
+                    },
+                    destroyed() {
+                        this.eventHub.$off("test-event");
+                        console.log(this.$el)
+                    },
+                    mounted() {
+                        this.eventHub.$on("test-event", function () {
+                            console.log("eventhub - test-event")
+                        })
+                    },
+                }
+            },
+
+            methods: {
+                testEvent(){
+                    console.log("parent - testEvent")
+                }
+            },
+
+        })
+    </script>
 </body>
+
 </html>
