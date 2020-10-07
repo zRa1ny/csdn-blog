@@ -69,9 +69,9 @@ let unusable1: void = undefined;
     let anyThing: any = 'hello';
     anyThing.toString();
     anyThing.length;
-    anyThing.toNumber();
-    anyThing.setName();
-    anyThing.sayHello();
+    // anyThing.toNumber();
+    // anyThing.setName();
+    // anyThing.sayHello();
 }
 {
     let num: number = 1;
@@ -336,10 +336,14 @@ function getLength(something: string | number): string {
 // }
 // interface Cat{
 //     name:string
-  
+
 // }
 
 // let tom = getCacheData<Cat>('tom') 
 
-$('#foo') 
+// $('#foo') 
+// declare const jQuery = function (select) {
+//     return document.querySelector(select)
+// }
 
+// let cat = new Animal('tom')
