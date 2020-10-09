@@ -347,3 +347,421 @@ function getLength(something: string | number): string {
 // }
 
 // let cat = new Animal('tom')
+
+{
+    let b: Boolean = new Boolean(1);
+    let e: Error = new Error('new Error');
+    let d: Date = new Date();
+    let r: RegExp = new RegExp(/[a-z]/);
+}
+{
+    let body: HTMLElement = document.body;
+    let allDiv: NodeList = document.querySelectorAll('div');
+    document.addEventListener('click', function (e: MouseEvent) {
+
+    })
+}
+{
+    // Math.pow(10,'2')
+}
+{
+    interface Math {
+        pow(x: number, y: number): number
+    }
+}
+{
+    document.addEventListener('click', function (e) {
+        // console.log(e.targetCurrent) // 类型“MouseEvent”上不存在属性“targetCurrent”。
+    })
+}
+{
+    //     interface Document extends Node,GlobalEventHandlers,DocumentEvent {
+
+    //     }
+}
+{
+    // type Name = string ;
+    // type NameResolver = () => string;
+    // type NameOrNameResolver = Name | NameResolver ;
+    // function getName(n:NameOrNameResolver):Name{
+    //     if(typeof n == 'string'){
+    //         return n
+    //     }
+    //     return n()
+    // }
+}
+// {
+// type EventNames = 'click' | 'scroll' | 'mousemove';
+// function handleEvent(ele: Element, event: EventNames) { }
+// handleEvent(document.getElementById('hello'), 'scroll');  // 没问题
+// handleEvent(document.getElementById('world'), 'dblclick'); // 报错，类型“"dblclick"”的参数不能赋给类型“EventNames”的参数。
+// }
+{
+    let tom: [string, number] = ['tom', 25]
+}
+{
+    let tom: [string, number];
+    tom[0] = '1';
+    tom[1] = 24;
+    // tom[3]=1;// 长度为 "2" 的元组类型 "[string, number]" 在索引 "3" 处没有元素。
+    tom[0].slice(1);
+    tom[1].toFixed(2)
+}
+{
+    let tom: [string, number];
+    tom[0] = 'tom'
+}
+{
+    let tom: [string, number];
+    tom = ['1', 1]
+    // tom=['1'] // 类型 "[string]" 中缺少属性 "1"，但类型 "[string, number]" 中需要该属性。
+}
+{
+    let tom: [string, number];
+    tom = ['1', 1]
+    tom.push('male')
+    // tom.push(true)  //类型“true”的参数不能赋给类型“string | number”的参数。
+}
+{
+    enum Days { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+    console.log(Days["Sun"] === 0); // true
+    console.log(Days["Mon"] === 1); // true
+    console.log(Days["Tue"] === 2); // true
+    console.log(Days["Sat"] === 6); // true
+
+    console.log(Days[0] === "Sun"); // true
+    console.log(Days[1] === "Mon"); // true
+    console.log(Days[2] === "Tue"); // true
+    console.log(Days[6] === "Sat"); // true
+}
+{
+    enum Days { Sun = 7, Mon = 1, Tue, Wed, Thu, Fri, Sat };
+}
+{
+    enum Days { Sun = 3, Mon = 1, Tue, Wed, Thu, Fri, Sat };
+}
+{
+    // enum Days { Sun = 3, Mon = 1, Tue, Wed, Thu = <any> "T", Fri, Sat  };
+}
+{
+    enum Days { Sun = 3, Mon = 1.2, Tue, Wed, Thu, Fri, Sat };
+}
+{
+    enum Colors { Red, Green, Blue = 'blue'.length }
+}
+{
+    const enum Directives {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
+    let directives = [Directives.Up, Directives.Down, Directives.Left, Directives.Right]
+}
+// {
+// declare enum Directives{
+//     Up,
+//     Down,
+//     Left,
+//     Right
+// }
+// let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+// }
+
+
+{
+    class Animal {
+        public name
+        constructor(name) {
+            this.name = name
+        }
+        sayHi() {
+            return `My name is ${this.name}`
+        }
+    }
+
+    let a = new Animal('Jack');
+    console.log(a.sayHi())
+
+    class Cat extends Animal {
+        constructor(name) {
+            super(name)
+        }
+        sayHi() {
+            return `Meow,` + super.sayHi();
+        }
+    }
+
+    let c = new Cat('Tom'); // Tom
+    console.log(c.sayHi()); // Meow, My name is Tom
+}
+
+{
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+        get name() {
+            return "jack"
+        }
+        set name(value) {
+            console.log('setter:' + value)
+        }
+    }
+
+    let a = new Animal('Kitty'); // setter: Kitty
+    a.name = 'Tom'; // setter: Tom
+    console.log(a.name); // Jack
+}
+
+{
+    class Animal {
+        public name
+        static isAnimal(a) {
+            return a instanceof Animal
+        }
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    let a = new Animal('Jack');
+    Animal.isAnimal(a);
+}
+
+{
+    class Animal {
+        name = 'jack'
+        constructor() { }
+    }
+}
+
+{
+    class Animal {
+        static num = 42
+        constructor() { }
+    }
+
+    console.log(Animal.num)
+}
+
+{
+    class Animal {
+        public name
+        public constructor(name) {
+            this.name = name
+        }
+    }
+
+    let a = new Animal('Jack');
+    console.log(a.name); // Jack
+    a.name = 'Tom';
+    console.log(a.name); // Tom
+}
+
+{
+    class Animal {
+        protected name
+        public constructor(name) {
+            this.name = name
+        }
+    }
+    let a = new Animal('Jack');
+    // console.log(a.name); // 属性“name”为私有属性，只能在类“Animal”中访问。
+    // a.name = 'Tom'; // 属性“name”为私有属性，只能在类“Animal”中访问。
+    // console.log(a.name); // 属性“name”为私有属性，只能在类“Animal”中访问。
+    class Cat extends Animal {
+        constructor(name) {
+            super(name);
+            console.log(this.name);
+        }
+    }
+}
+
+{
+    class Animal {
+        protected constructor(name) {
+        }
+    }
+    // let a = new Animal('Jack');//类“Animal”的构造函数是受保护的，仅可在类声明中访问。
+    class Cat extends Animal {
+        constructor(name) {
+            super(name);
+        }
+    }
+
+    let c = new Cat('c')
+
+}
+{
+    class Animal {
+        public constructor(public name) { }
+    }
+}
+
+{
+    class Animal {
+        readonly name
+        constructor(name) {
+            this.name = name;
+        }
+    }
+    let a = new Animal('A');
+    console.log(a.name)
+    // a.name ="a" // 无法分配到 "name" ，因为它是只读属性。
+}
+
+{
+    abstract class Animal {
+        constructor() { }
+        public abstract sayHi();
+    }
+    // let a = new Animal() // 无法创建抽象类的实例。
+    class Cat extends Animal {
+        public eat() { }
+        sayHi() { }
+    } // 非抽象类“Cat”不会实现继承自“Animal”类的抽象成员“sayHi”。
+
+    let c = new Cat();
+}
+{
+    class Animal {
+        name: string;
+        constructor(name: string) {
+            this.name = name;
+        }
+        sayHi(): string {
+            return `My name is ${this.name}`
+        }
+    }
+
+    let a: Animal = new Animal('Jack');
+}
+
+{
+    interface Alarm {
+        alert(): void;
+    }
+    interface Light {
+        lightOn(): void;
+        lightOff(): void;
+    }
+    class Door { }
+    class SecurityDoor extends Door implements Alarm {
+        alert() {
+            console.log('SecurityDoor alert')
+        }
+    }
+
+    class Car implements Alarm {
+        alert() {
+            console.log('Car alert');
+        }
+        lightOn() {
+            console.log('Car light on');
+        }
+        lightOff() {
+            console.log('Car light off');
+        }
+    }
+}
+{
+    interface Alarm {
+        alert(): void;
+    }
+
+    interface LightTableAlarm extends Alarm {
+        lightOn(): void;
+        lightOff(): void;
+    }
+}
+
+{
+    class Point {
+        x: number
+        y: number
+        constructor(x: number, y: number) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    interface Point3d extends Point {
+        z: number
+    }
+
+    let point3d: Point3d = { x: 1, y: 1, z: 1 }
+}
+
+// {
+// function createArray<t>(length: number, value: t): Array<t> {
+//     let result = [];
+//     for (let i = 0; i < length; i++) {
+//         result[i] = value;
+//     }
+//     return result
+// }
+// createArray<string>(3, 'x'); // ['x', 'x', 'x']
+// }
+
+// function swap<T, U>(tuple: [T, U]): [U, T] {
+//     return [tuple[1], tuple[0]]
+// }
+// swap([7,'seven'])
+// interface Lengthwise{
+//     length:number
+// }
+// function loggingIdentity<T extends Lengthwise>(arg:T):T{
+//     console.log(arg.length) // 类型“T”上不存在属性“length”。
+//     return arg
+// }
+
+// loggingIdentity(7) // 类型“7”的参数不能赋给类型“Lengthwise”的参数。
+// loggingIdentity('7') 
+
+
+// function copyFields<T extends U , U>(target:T,source:U):T{
+//     for (let id in source) {
+//         target[id] = (<T>source)[id];
+//     }
+//     return target
+// }
+
+// let x = {a : 1, b:2,c:3,d:4};
+// copyFields(x,{a:10})
+
+// interface CreateArrayFunc<T> {
+//     (length: number, value: T): Array<T>
+// }
+
+// let createArray: CreateArrayFunc<string>;
+// createArray = function (length, value) {
+//     let result = [];
+//     for (let i = 0; i < length; i++) {
+//         result[i] = value;
+//     }
+//     return result;
+// }
+
+{
+    class GenericNumber<T>{
+        zeroValue: T
+        add: (x: T, y: T) => T
+    }
+    let myGenericNumber: GenericNumber<number>;
+    myGenericNumber =new class {
+        zeroValue: 0
+        add(x, y) {
+            return x + y
+        }
+    }
+
+    // let myGenericNumber = new GenericNumber<number>();
+    // myGenericNumber.zeroValue = 0;
+    // myGenericNumber.add = function (x, y) { return x + y; };
+}
+
+{
+    function
+}
+
