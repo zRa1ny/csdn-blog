@@ -1,0 +1,157 @@
+```
+# 开启注册，此配置允许任何人自注册和登录系统
+DRONE_OPEN=true
+#直接配置ip:port 会报错
+DRONE_HOST=http://106.14.17.48:2021
+# Gogs服务器地址
+DRONE_GOGS_URL=http://106.14.17.48:2020
+DRONE_DEBUG=true
+# 此SECRET为任意值
+DRONE_SECRET=drone.zRainy.com
+# 开启Gogs驱动
+DRONE_GOGS=true
+DRONE_GOGS_SKIP_VERIFY=false
+DRONE_GOGS_PRIVATE_MODE=true
+# Drone Server 地址
+DRONE_SERVER=drone-server:9000
+# 与Drone Server一致即可
+DRONE_SECRET=drone.zRainy.com
+DRONE_DEBUG=true
+
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_SERVER_HOST=106.14.17.48:2021
+DRONE_SERVER_PROTO=http
+DRONE_OPEN=true
+DRONE_GOGS=true
+DRONE_GOGS_SERVER=106.14.17.48:2020
+DRONE_PROVIDER=gogs
+DRONE_LOGS_TRACE=true
+DRONE_LOGS_DEBUG=true
+DRONE_DATABASE_DATASOURCE=/var/lib/drone/drone.sqlite
+DRONE_DATABASE_DRIVER=sqlite3
+DRONE_DATABASE_DATASOURCE=drone:drone@tcp(106.14.17.48:3306)/drone?charset=utf8mb4
+
+DRONE_OPEN=true
+DRONE_SERVER_HOST=drone-server
+DRONE_DEBUG=true
+DRONE_GIT_ALWAYS_AUTH=false
+DRONE_GOGS=true
+DRONE_GOGS_SKIP_VERIFY=false
+DRONE_GOGS_SERVER=http://106.14.17.48:2020
+DRONE_PROVIDER=gogs
+DRONE_DATABASE_DATASOURCE=drone:drone@tcp(106.14.17.48:3306)/drone?parseTime=true
+DRONE_DATABASE_DRIVER=mysql
+DRONE_SERVER_PROTO=http
+DRONE_RPC_SECRET=drone.zRainy.com
+
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_RPC_SERVER=http://106.14.17.48:2021
+DRONE_LOGS_TRACE=true
+DRONE_LOGS_DEBUG=true
+
+DRONE_RPC_SERVER=http://106.14.17.48:2021
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_DEBUG=true
+DOCKER_HOST=tcp://docker-bind:2375
+
+
+DRONE_AGENTS_ENABLED=true
+DRONE_GOGS_SERVER=https://gogs.company.com 
+DRONE_RPC_SECRET={{DRONE_RPC_SECRET}} 
+DRONE_SERVER_HOST={{DRONE_SERVER_HOST}} 
+DRONE_SERVER_PROTO={{DRONE_SERVER_PROTO}}
+// 1.0.0 精简
+DRONE_GIT_ALWAYS_AUTH=false
+DRONE_GOGS_SERVER=http://106.14.17.48:2020
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_SERVER_HOST=106.14.17.48:2021
+DRONE_SERVER_PROTO=http
+
+
+DRONE_RPC_PROTO=http
+DRONE_RPC_HOST=drone.zrainy.club
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_LOGS_TRACE=true
+DRONE_LOGS_DEBUG=true
+
+
+//
+/etc/localtime:/etc/localtime
+//  1.0.0
+
+--volume=/home/docker/drone:/data
+/etc/loaltime:/etc/loaltime:ro
+
+DRONE_OPEN=true
+DRONE_GIT_ALWAYS_AUTH=false
+DRONE_SERVER_HOST=drone.zrainy.club
+DRONE_DEBUG=true
+DRONE_SERVER_PROTO=http
+DRONE_PROVIDER=gogs
+DRONE_GOGS=true
+DRONE_GOGS_SERVER=http://git.zrainy.club
+DRONE_DATABASE_DATASOURCE=drone:drone@tcp(106.14.17.48:3306)/drone?parseTime=true
+DRONE_DATABASE_DRIVER=mysql
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_USER_CREATE=username:zRainy,admin:true
+DRONE_GIT_USERNAME=zRainy
+DRONE_GIT_PASSWORD=Qaz@wsx123
+
+/var/run/docker.sock:/var/run/docker.sock
+/etc/timezone:/etc/timezone
+/etc/localtime:/etc/localtime 
+
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_RPC_SERVER=106.14.17.48:2021
+DRONE_LOGS_TRACE=true
+DRONE_LOGS_DEBUG=true
+
+
+// 172.19.78.243
+DRONE_OPEN=true
+DRONE_SERVER_HOST=172.19.78.243:2021
+DRONE_DEBUG=true
+DRONE_GIT_ALWAYS_AUTH=false
+DRONE_GOGS=true
+DRONE_GOGS_SKIP_VERIFY=false
+DRONE_SERVER_PROTO=ssh
+DRONE_GOGS_SERVER=http://106.14.17.48:2020
+DRONE_PROVIDER=gogs
+DRONE_DATABASE_DATASOURCE=drone:drone@tcp(172.19.78.243:3306)/drone?parseTime=true
+DRONE_DATABASE_DRIVER=mysql
+DRONE_RPC_SECRET=drone.zRainy.com
+
+/var/run/docker.sock:/var/run/docker.sock 
+
+DRONE_RPC_SECRET=drone.zRainy.com
+DRONE_RPC_SERVER=http://172.19.78.243:2021
+DRONE_LOGS_TRACE=true
+DRONE_LOGS_DEBUG=true
+
+//  0.8.0 
+
+DRONE_OPEN=true
+DRONE_HOST=http://106.14.17.48:2021
+DRONE_GOGS=true
+DRONE_GOGS_URL=http://106.14.17.48:2020
+DRONE_SECRET=drone.zRainy.com
+DRONE_DATABASE_DATASOURCE=drone:drone@tcp(106.14.17.48:3306)/drone?parseTime=true
+DRONE_DATABASE_DRIVER=mysql
+
+
+DRONE_SERVER=drone-server:9000
+DRONE_SECRET=drone.zRainy.com
+```
+
+安装drone-cli
+curl -L https://github.com/drone/drone-cli/releases/latest/download/drone_linux_amd64.tar.gz | tar zx
+sudo install -t /usr/local/bin drone
+
+export DRONE_SERVER=http://drone.zrainy.club
+export DRONE_TOKEN=pxLf6oBVdfwrdZIv4Lj3ofyiqEHISZmb
+drone info
+
+对组织添加环境变量
+ drone orgsecret add [organization] [name] [data]
+ drone orgsecret add test first_secret first_secret
+ drone orgsecret add test docker_password1 pa55word1
