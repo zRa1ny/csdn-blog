@@ -72,90 +72,158 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // function TestGrandson(props){
 //     return <div> <p>孙组件：{props.name}</p></div>
 // }
+// const themes = {
+//     light:{
+//         color:'#000000',
+//         backgroundColor:'#eeeeee'
+//     },
+//     dark:{
+//         color:'#ffffff',
+//         backgroundColor:'#222222'
+//     }
+// }
+
+// const ThemesContext = React.createContext(
+//     themes.dark
+// )
+
+// class ThemeButton extends React.Component{
+//     static contextType = ThemesContext
+//     render(){
+//         let props = this.props;
+//         let theme = this.context;
+//         return (
+//             <button {...props} style={theme}></button>
+//         )
+//     }
+// }
+
+// function Toolbar (props){
+//     return (
+//         <ThemeButton onClick={props.changeTheme}>
+//             changeTheme
+//         </ThemeButton>
+//     )
+// }
+
+
+// class App extends React.Component{
+//     constructor(props){
+//         super(props)
+//         this.state={
+//             theme:themes.light
+//         }
+
+//         this.toggleTheme = () => {
+//             this.setState(state =>({
+//                 theme:state.theme === themes.dark ? themes.light : themes.dark
+//             }))
+//         }
+//     }
+
+//     render() {
+//         // 在 ThemeProvider 内部的 ThemedButton 按钮组件使用 state 中的 theme 值，
+//         // 而外部的组件使用默认的 theme 值
+//         return (
+//           <div>
+//             <ThemesContext.Provider value={this.state.theme}>
+//               <Toolbar changeTheme={this.toggleTheme} />
+//             </ThemesContext.Provider>
+//           </div>
+//         );
+//       }
+// }
 var themes = {
     light: {
-        fontgorund: '#000000',
-        background: '#eeeeee'
+        color: '#000000',
+        backgroundColor: '#eeeeee'
     },
     dark: {
-        fontgorund: '#ffffff',
-        background: '#222222'
+        color: '#ffffff',
+        backgroundColor: '#222222'
     }
 };
+var ThemeContext = React.createContext({
+    theme: themes.dark,
+    toggleTheme: function toggleTheme() {}
+});
+// function ThemeTogglerButton () {
+//     return (
+//         <ThemeContext.Consumer>
+//             {
+//                 ({ theme, toggleTheme }) => (<button onClick={toggleTheme} style={theme}>
+//                     Toggle Theme
+//                 </button>)
+//             }
+//         </ThemeContext.Consumer>
+//     )
+// }
 
-var ThemesContext = React.createContext(themes.dark);
+// class App extends React.Component {
+//     constructor(props) {
+//         super(props)
 
-var ThemeButton = function (_React$Component) {
-    _inherits(ThemeButton, _React$Component);
+//         this.toggleTheme = () => {
+//             this.setState(state => ({
+//                 theme:
+//                     state.theme === themes.dark
+//                         ? themes.light
+//                         : themes.dark,
+//             }));
+//         }
 
-    function ThemeButton() {
-        _classCallCheck(this, ThemeButton);
+//         this.state = {
+//             theme: themes.light,
+//             toggleTheme: this.toggleTheme,
+//         };
+//     }
 
-        return _possibleConstructorReturn(this, (ThemeButton.__proto__ || Object.getPrototypeOf(ThemeButton)).apply(this, arguments));
-    }
+//     render () {
+//         // 整个 state 都被传递进 provider
+//         return (
+//             <ThemeContext.Provider value={this.state}>
+//                 <Content />
+//             </ThemeContext.Provider>
+//         );
+//     }
+// }
 
-    _createClass(ThemeButton, [{
-        key: 'render',
-        value: function render() {
-            var props = this.props;
-            var theme = this.context;
-            return React.createElement('button', Object.assign({}, props, { style: { backgroundColor: theme.background } }));
-        }
-    }]);
+// function Content() {
+//     return (
+//       <div>
+//         <ThemeTogglerButton />
+//       </div>
+//     );
+//   }
 
-    return ThemeButton;
-}(React.Component);
+var ThemeContext = React.createContext('light');
+var UserContext = React.createContext({
+    name: "Guest"
+});
 
-ThemeButton.contextType = ThemesContext;
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
 
-
-function Toolbar(props) {
-    return React.createElement(
-        ThemeButton,
-        { onClick: props.changeTheme },
-        'changeTheme'
-    );
-}
-
-var App = function (_React$Component2) {
-    _inherits(App, _React$Component2);
-
-    function App(props) {
+    function App() {
         _classCallCheck(this, App);
 
-        var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-        _this2.state = {
-            theme: themes.light
-        };
-
-        _this2.toggleTheme = function () {
-            _this2.setState(function (state) {
-                return {
-                    theme: state.theme === themes.dark ? themes.light : _this2.dark
-                };
-            });
-        };
-        return _this2;
+        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
     }
 
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            // 在 ThemeProvider 内部的 ThemedButton 按钮组件使用 state 中的 theme 值，
-            // 而外部的组件使用默认的 theme 值
+            var _props = this.props,
+                signedInUserm = _props.signedInUserm,
+                theme = _props.theme;
+
             return React.createElement(
-                'div',
-                null,
+                ThemeContext.Provider,
+                { value: theme },
                 React.createElement(
-                    ThemesContext.Provider,
-                    { value: this.state.theme },
-                    React.createElement(Toolbar, { changeTheme: this.toggleTheme })
-                ),
-                React.createElement(
-                    'div',
+                    UserContext.Provider,
                     null,
-                    React.createElement(ThemeButton, null)
+                    React.createElement(Layout, null)
                 )
             );
         }
@@ -164,4 +232,35 @@ var App = function (_React$Component2) {
     return App;
 }(React.Component);
 
-ReactDOM.render(React.createElement(App, null), document.querySelector('#root'));
+function Layout() {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(Content, null)
+    );
+}
+
+// 一个组件可能会消费多个context
+function Content() {
+    return React.createElement(
+        ThemeContext.Consumer,
+        null,
+        function (theme) {
+            return React.createElement(
+                UserContext.Consumer,
+                null,
+                function (user) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        JSON.stringify(user),
+                        ' => ',
+                        theme
+                    );
+                }
+            );
+        }
+    );
+}
+
+ReactDOM.render(React.createElement(App, { theme: [1, 2] }), document.querySelector('#root'));
