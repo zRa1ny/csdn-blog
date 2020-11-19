@@ -4,15 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refs转发
-        
-    </title>
+    <title>Refs示例 </title>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        .ball {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: fixed;
+            background: chartreuse;
+            /* animation: run-left 4s linear, run-bottom 4s linear;
+            animation-fill-mode: forwards; */
+        }
+
+        @keyframes run-left {
+            99% {
+                left: 50px;
+                opacity: 1;
+            }
+            100% {
+                left: 100px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes run-bottom {
+            99% {
+                top: 90px;
+                opacity: 1;
+            }
+            100% {
+                top: 90px;
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>绘图</h1>
+    <!-- <h1>绘图</h1> -->
     <div id="root-canvas"></div>
-  
+    <!-- <h1>加入购物车</h1> -->
+    <div id="root-cart">
+
+    </div>
     <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
     <script src="./js/umd/react.development.js" crossorigin></script>
     <script src="./js/umd/react-dom.development.js" crossorigin></script>
