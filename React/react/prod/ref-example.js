@@ -1,7 +1,5 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -115,202 +113,266 @@ class DrawRing extends React.Component {
 ReactDOM.render(<DrawPanel />, document.querySelector('#root-canvas'))
 */
 
-var Shop = function (_React$Component) {
-    _inherits(Shop, _React$Component);
+// class Shop extends React.Component {
+//     state = {
+//         goods: [
+//             {
+//                 name: "苹果",
+//                 count: 0
+//             },
+//             {
+//                 name: "香蕉",
+//                 count: 1
+//             },
+//             {
+//                 name: "樱桃",
+//                 count: 0
+//             }
+//         ],
+//     }
+//     buy = (value, index, e) => {
+//         let newGoods = this.state.goods.map(function (good) {
+//             if (value.name == good.name) good.count += 1
+//             return good
+//         })
+//         this.setState({
+//             goods: newGoods
+//         })
+//         e.persist()
+//         this.cartRef.add({
+//             left: e.nativeEvent.x,
+//             top: e.nativeEvent.y,
+//         })
+//     }
+//     onRef = ref => {
+//         this.cartRef = ref
+//     }
+//     del = (value, index) => {
+//         let newGoods = this.state.goods.map(function (good) {
+//             if (value.name == good.name) good.count -= 1
+//             return good
+//         })
+//         this.setState({
+//             goods: newGoods
+//         })
+//     }
 
-    function Shop() {
+//     render () {
+//         const goods = this.state.goods,
+//             buyGoods = goods.filter(value => {
+//                 return value.count != 0
+//             })
+//         return <div style={{ position: 'relative' }}>
+//             <Goods data={goods} buy={this.buy}></Goods>
+//             <Cart onRef={this.onRef} data={buyGoods} del={this.del}></Cart>
+//         </div>
+//     }
+// }
+
+// class Goods extends React.Component {
+//     buy = (value, index, e) => {
+//         this.props.buy(value, index, e)
+//     }
+//     render () {
+//         const data = this.props.data;
+//         return <ul>
+//             {
+//                 data.map((value, index) => (<li onClick={(e) => { this.buy(value, index, e) }} key={index}><span>{value.name}</span><span>{value.count}</span></li>))
+//             }
+//         </ul>
+//     }
+// }
+
+// class Cart extends React.Component {
+//     refWrap = React.createRef()
+//     cartRef = React.createRef()
+//     constructor(props) {
+//         super(props)
+//         this.props.onRef(this);
+//     }
+//     del = (value, index) => {
+//         this.props.del(value, index)
+//     }
+//     state = {
+//         balls: []
+//     }
+//     ballId = 0
+//     add = (ball) => {
+//         ball = {
+//             style: ball,
+//             ballId: this.ballId++
+//         }
+//         this.setState({
+//             balls: [
+//                 ball,
+//                 ...this.state.balls
+//             ]
+//         })
+
+//         setTimeout(() => { this.animated(); }, 0)
+
+//     }
+//     del = (index) => {
+//         if (!index) index = 0;
+//         var newBalls = this.state.balls.map(value => value)
+//         newBalls.pop();
+//         this.setState({
+//             balls: newBalls
+//         })
+//     }
+//     componentDidMount () {
+//         const rect = this.cartRef.current.getBoundingClientRect()
+//         this.target.left = rect.x + rect.width / 2;
+//         this.target.top = rect.y + rect.height / 2;
+//         this.refWrap.current.addEventListener('webkitTransitionEnd', (e) => {
+//             this.del()
+//         })
+//     }
+//     target = {
+//         left: 0,
+//         top: 0
+//     }
+//     animated = () => {
+//         if (this.state.balls.length > 0 && this.state.balls.some(value => value.left != 0)) {
+//             var newBalls = this.state.balls.map(value => {
+//                 return Object.assign({}, { style: this.target }, {
+//                     ballId: value.ballId
+//                 })
+//             });
+//             this.setState({
+//                 balls: newBalls
+//             })
+//             console.log(this.state)
+
+//         }
+//     }
+//     render () {
+//         const data = this.props.data;
+//         const balls = this.state.balls;
+
+//         return <div ref={this.refWrap} className={'shopcart'}>
+//             <img ref={this.cartRef} src="./imgs/cart.png" />
+//             <ul >
+//                 {
+//                     balls.map((ball, index) => <li className="ball" key={'ball' + ball.ballId} style={ball.style}></li>)
+//                 }
+//                 {
+//                     data.map((value, index) => (<li onClick={() => { this.del(value, index) }} key={index}><span>{value.name}</span><span>{value.count}</span></li>))
+//                 }
+//             </ul>
+//         </div>
+//     }
+// }
+
+
+// ReactDOM.render(<Shop />, document.querySelector('#root-cart'))
+// class App extends React.Component {
+//     sonRef = React.createRef()
+//     grandsonRef = React.createRef()
+//     onClickHandle=()=>{
+//         console.log(this.sonRef)
+//         console.log(this.grandsonRef)
+//     }
+//     render () {
+//         return <div onClick={this.onClickHandle}> <Son ref={this.sonRef} diyref={this.grandsonRef} /></div>
+//     }
+// }
+
+// class Son extends React.Component {
+
+//     render () {
+//         const {diyref} = this.props;
+//         return <div><div>Son</div><GrandSon ref={diyref} ></GrandSon></div>
+//     }
+// }
+// class GrandSon extends React.Component {
+
+//     render () {
+//         console.log(this.props)
+//         return <div>GrandSon</div>
+//     }
+// }
+
+
+// ReactDOM.render(<App />, document.querySelector('#root'))
+
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
+
+    function App() {
         var _ref;
 
         var _temp, _this, _ret;
 
-        _classCallCheck(this, Shop);
+        _classCallCheck(this, App);
 
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Shop.__proto__ || Object.getPrototypeOf(Shop)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            goods: [{
-                name: "苹果",
-                count: 0
-            }, {
-                name: "香蕉",
-                count: 1
-            }, {
-                name: "樱桃",
-                count: 0
-            }]
-        }, _this.buy = function (value, index, e) {
-            var newGoods = _this.state.goods.map(function (good) {
-                if (value.name == good.name) good.count += 1;
-                return good;
-            });
-            _this.setState({
-                goods: newGoods
-            });
-            e.persist();
-            _this.cartRef.add({
-                left: e.nativeEvent.x,
-                top: e.nativeEvent.y
-            });
-        }, _this.onRef = function (ref) {
-            _this.cartRef = ref;
-        }, _this.del = function (value, index) {
-            var newGoods = _this.state.goods.map(function (good) {
-                if (value.name == good.name) good.count -= 1;
-                return good;
-            });
-            _this.setState({
-                goods: newGoods
-            });
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.sonRef = React.createRef(), _this.grandsonRef = React.createRef(), _this.onClickHandle = function () {
+            console.log('sonRef=>', _this.sonRef);
+            console.log('grandsonRef=>', _this.grandsonRef);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(Shop, [{
-        key: "render",
+    _createClass(App, [{
+        key: 'render',
         value: function render() {
-            var goods = this.state.goods,
-                buyGoods = goods.filter(function (value) {
-                return value.count != 0;
-            });
             return React.createElement(
-                "div",
-                { style: { position: 'relative' } },
-                React.createElement(Goods, { data: goods, buy: this.buy }),
-                React.createElement(Cart, { onRef: this.onRef, data: buyGoods, del: this.del })
+                'div',
+                { onClick: this.onClickHandle },
+                ' ',
+                React.createElement(Son, { ref: this.sonRef, diyref: this.grandsonRef })
             );
         }
     }]);
 
-    return Shop;
+    return App;
 }(React.Component);
 
-var Goods = function (_React$Component2) {
-    _inherits(Goods, _React$Component2);
+// class Son extends React.Component {
+//     render () {
+//         const {diyref} = this.props;
+//         return <div><div>Son</div><GrandSon ref={diyref} ></GrandSon></div>
+//     }
+// }
 
-    function Goods() {
-        var _ref2;
+var Son = React.forwardRef(function (props, ref) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'div',
+            null,
+            'Son'
+        ),
+        React.createElement(GrandSon, { ref: ref })
+    );
+});
 
-        var _temp2, _this2, _ret2;
+var GrandSon = function (_React$Component2) {
+    _inherits(GrandSon, _React$Component2);
 
-        _classCallCheck(this, Goods);
+    function GrandSon() {
+        _classCallCheck(this, GrandSon);
 
-        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
-        }
-
-        return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = Goods.__proto__ || Object.getPrototypeOf(Goods)).call.apply(_ref2, [this].concat(args))), _this2), _this2.buy = function (value, index, e) {
-            _this2.props.buy(value, index, e);
-        }, _temp2), _possibleConstructorReturn(_this2, _ret2);
+        return _possibleConstructorReturn(this, (GrandSon.__proto__ || Object.getPrototypeOf(GrandSon)).apply(this, arguments));
     }
 
-    _createClass(Goods, [{
-        key: "render",
+    _createClass(GrandSon, [{
+        key: 'render',
         value: function render() {
-            var _this3 = this;
-
-            var data = this.props.data;
+            console.log(this.props);
             return React.createElement(
-                "ul",
+                'div',
                 null,
-                data.map(function (value, index) {
-                    return React.createElement(
-                        "li",
-                        { onClick: function onClick(e) {
-                                _this3.buy(value, index, e);
-                            }, key: index },
-                        React.createElement(
-                            "span",
-                            null,
-                            value.name
-                        ),
-                        React.createElement(
-                            "span",
-                            null,
-                            value.count
-                        )
-                    );
-                })
+                'GrandSon'
             );
         }
     }]);
 
-    return Goods;
+    return GrandSon;
 }(React.Component);
 
-var Cart = function (_React$Component3) {
-    _inherits(Cart, _React$Component3);
-
-    function Cart(props) {
-        _classCallCheck(this, Cart);
-
-        var _this4 = _possibleConstructorReturn(this, (Cart.__proto__ || Object.getPrototypeOf(Cart)).call(this, props));
-
-        _this4.refWrap = React.createRef();
-
-        _this4.del = function (value, index) {
-            _this4.props.del(value, index);
-        };
-
-        _this4.state = {
-            balls: []
-        };
-
-        _this4.add = function (ball) {
-
-            _this4.setState({
-                balls: [].concat(_toConsumableArray(_this4.state.balls), [ball])
-            });
-        };
-
-        _this4.props.onRef(_this4);
-        return _this4;
-    }
-
-    _createClass(Cart, [{
-        key: "animated",
-        value: function animated() {
-            clearTimeout(this.timer);
-            if (this.state.balls.length > 0) {
-                setTimeout(function () {}, 1000);
-            }
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var _this5 = this;
-
-            var data = this.props.data;
-            var balls = this.state.balls;
-            return React.createElement(
-                "ul",
-                { ref: this.refWrap },
-                balls.map(function (ball, index) {
-                    return React.createElement("li", { className: "ball", key: 'ball' + index, style: ball });
-                }),
-                data.map(function (value, index) {
-                    return React.createElement(
-                        "li",
-                        { onClick: function onClick() {
-                                _this5.del(value, index);
-                            }, key: index },
-                        React.createElement(
-                            "span",
-                            null,
-                            value.name
-                        ),
-                        React.createElement(
-                            "span",
-                            null,
-                            value.count
-                        )
-                    );
-                })
-            );
-        }
-    }]);
-
-    return Cart;
-}(React.Component);
-
-ReactDOM.render(React.createElement(Shop, null), document.querySelector('#root-cart'));
+ReactDOM.render(React.createElement(App, null), document.querySelector('#root'));

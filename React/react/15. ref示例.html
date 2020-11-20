@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refs示例 </title>
+
     <style>
         ul {
             list-style: none;
+            margin: 20px 0;
+            padding: 0;
         }
 
         .ball {
@@ -16,8 +19,18 @@
             border-radius: 50%;
             position: fixed;
             background: chartreuse;
+            transition: all 2s cubic-bezier(.21, .74, .3, .83);
             /* animation: run-left 4s linear, run-bottom 4s linear;
             animation-fill-mode: forwards; */
+        }
+
+        .shopcart {
+            display: flex;
+        }
+
+        .shopcart>img {
+            width: 40px;
+            height: 40px;
         }
 
         @keyframes run-left {
@@ -25,6 +38,7 @@
                 left: 50px;
                 opacity: 1;
             }
+
             100% {
                 left: 100px;
                 opacity: 0;
@@ -36,6 +50,7 @@
                 top: 90px;
                 opacity: 1;
             }
+
             100% {
                 top: 90px;
                 opacity: 0;
@@ -48,9 +63,8 @@
     <!-- <h1>绘图</h1> -->
     <div id="root-canvas"></div>
     <!-- <h1>加入购物车</h1> -->
-    <div id="root-cart">
-
-    </div>
+    <div id="root-cart"></div>
+    <div id="root"></div>
     <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
     <script src="./js/umd/react.development.js" crossorigin></script>
     <script src="./js/umd/react-dom.development.js" crossorigin></script>
