@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloWorld",
+            "request": "launch",
+            "mainClass": "HelloWorld",
+            "projectName": "csdn-blog_dbfa6bfc"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "启动程序",
