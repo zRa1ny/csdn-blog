@@ -1,13 +1,3 @@
-class Test extends React.Component {
-    render () {
-        return ReactDOM.createPortal(
-            <div>test</div>,
-            document.querySelector('body')
-        )
-    }
-}
-
-ReactDOM.render(<Test></Test>, document.querySelector("#root"))
 
 const appRoot = document.getElementById('app-root')
 const modalRoot = document.getElementById('modal-root')
@@ -58,25 +48,37 @@ class Parent extends React.Component {
             clicks: state.clicks + 1
         }))
     }
-    render(){
+    render () {
         return (
             <div onClick={this.handleClick}>
                 <p>Number of clicks : {this.state.clicks}</p>
-                <Modal>
-                    <Child/>
-                </Modal>
+                <Profiler id="Modal" onRender={onRenderCallback}>
+                    <Modal>
+                        <Child />
+                    </Modal>
+                </Profiler>
             </div>
         )
     }
 }
+function onRenderCallback(
+    id, // 发生提交的 Profiler 树的 “id”
+    phase, // "mount" （如果组件树刚加载） 或者 "update" （如果它重渲染了）之一
+    actualDuration, // 本次更新 committed 花费的渲染时间
+    baseDuration, // 估计不使用 memoization 的情况下渲染整颗子树需要的时间
+    startTime, // 本次更新中 React 开始渲染的时间
+    commitTime, // 本次更新中 React committed 的时间
+    interactions // 属于本次更新的 interactions 的集合
+  ) {
+    console.log(arguments)
+  }
 
-
-function Child(){
+function Child () {
     return (
-        <div className = "modal">
+        <div className="modal">
             <button>clcik</button>
         </div>
     )
 }
 
-ReactDOM.render(<Parent /> , appRoot)
+ReactDOM.render(<Parent />, appRoot)

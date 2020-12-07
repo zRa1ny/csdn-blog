@@ -6,44 +6,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Test = function (_React$Component) {
-    _inherits(Test, _React$Component);
-
-    function Test() {
-        _classCallCheck(this, Test);
-
-        return _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).apply(this, arguments));
-    }
-
-    _createClass(Test, [{
-        key: 'render',
-        value: function render() {
-            return ReactDOM.createPortal(React.createElement(
-                'div',
-                null,
-                'test'
-            ), document.querySelector('body'));
-        }
-    }]);
-
-    return Test;
-}(React.Component);
-
-ReactDOM.render(React.createElement(Test, null), document.querySelector("#root"));
-
 var appRoot = document.getElementById('app-root');
 var modalRoot = document.getElementById('modal-root');
 
-var Modal = function (_React$Component2) {
-    _inherits(Modal, _React$Component2);
+var Modal = function (_React$Component) {
+    _inherits(Modal, _React$Component);
 
     function Modal(props) {
         _classCallCheck(this, Modal);
 
-        var _this2 = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
 
-        _this2.el = document.createElement('div');
-        return _this2;
+        _this.el = document.createElement('div');
+        return _this;
     }
 
     _createClass(Modal, [{
@@ -74,19 +49,19 @@ var Modal = function (_React$Component2) {
     return Modal;
 }(React.Component);
 
-var Parent = function (_React$Component3) {
-    _inherits(Parent, _React$Component3);
+var Parent = function (_React$Component2) {
+    _inherits(Parent, _React$Component2);
 
     function Parent(props) {
         _classCallCheck(this, Parent);
 
-        var _this3 = _possibleConstructorReturn(this, (Parent.__proto__ || Object.getPrototypeOf(Parent)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (Parent.__proto__ || Object.getPrototypeOf(Parent)).call(this, props));
 
-        _this3.state = {
+        _this2.state = {
             clicks: 0
         };
-        _this3.handleClick = _this3.handleClick.bind(_this3);
-        return _this3;
+        _this2.handleClick = _this2.handleClick.bind(_this2);
+        return _this2;
     }
 
     _createClass(Parent, [{
@@ -115,9 +90,13 @@ var Parent = function (_React$Component3) {
                     this.state.clicks
                 ),
                 React.createElement(
-                    Modal,
-                    null,
-                    React.createElement(Child, null)
+                    Profiler,
+                    { id: 'Modal', onRender: onRenderCallback },
+                    React.createElement(
+                        Modal,
+                        null,
+                        React.createElement(Child, null)
+                    )
                 )
             );
         }
@@ -125,6 +104,17 @@ var Parent = function (_React$Component3) {
 
     return Parent;
 }(React.Component);
+
+function onRenderCallback(id, // 发生提交的 Profiler 树的 “id”
+phase, // "mount" （如果组件树刚加载） 或者 "update" （如果它重渲染了）之一
+actualDuration, // 本次更新 committed 花费的渲染时间
+baseDuration, // 估计不使用 memoization 的情况下渲染整颗子树需要的时间
+startTime, // 本次更新中 React 开始渲染的时间
+commitTime, // 本次更新中 React committed 的时间
+interactions // 属于本次更新的 interactions 的集合
+) {
+    console.log(arguments);
+}
 
 function Child() {
     return React.createElement(
