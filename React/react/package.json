@@ -4,7 +4,8 @@
   "description": "cd react\r npx babel --watch ./dev --out-dir ./prod --presets react-app/prod",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "flow": "flow"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +13,9 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2"
+  },
+  "devDependencies": {
+    "@babel/preset-flow": "^7.12.1",
+    "flow-bin": "^0.139.0"
   }
 }
