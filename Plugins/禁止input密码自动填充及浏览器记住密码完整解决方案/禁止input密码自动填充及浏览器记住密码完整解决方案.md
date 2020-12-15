@@ -127,7 +127,7 @@ ps:ie可以配合`style="ime-mode:disabled"`禁用中文输入法，为了保持
 
 
     Text2Password.prototype._preventDefaultEvent = function (e) {
-        function _preventDefaultHandler () {
+        function _preventDefaultHandler (e) {
             var e = e || window.event;
             e.preventDefault();
         }

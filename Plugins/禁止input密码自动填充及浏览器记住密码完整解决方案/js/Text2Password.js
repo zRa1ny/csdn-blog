@@ -47,19 +47,14 @@
 
     Text2Password.prototype.init = function () {
         this.$setValue(); // 设置初始值
-
         this._preventDefaultEvent(); //阻止input type=text 的默认操作 使其比较相似与password
-
-
         this._bindEvent(); // 绑定事件 转化数据 =》 符号
-
-
         this.isInit = true;
     }; // 阻止复制 剪切  拖拽进入 拖拽离开
 
 
     Text2Password.prototype._preventDefaultEvent = function (e) {
-        function _preventDefaultHandler () {
+        function _preventDefaultHandler (e) {
             var e = e || window.event;
             e.preventDefault();
         }
