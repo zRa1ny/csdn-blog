@@ -8,14 +8,31 @@
 </head>
 
 <body>
-    <div id="root"></div>
+    <!-- <div id="root"></div>
     <div id="test"></div>
     <div id="app-root"></div>
-    <div id="modal-root"></div>
+    <div id="modal-root"></div> -->
     <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
-    <script src="./js/umd/react.development.js" crossorigin></script>
+    <!-- <script src="./js/umd/react.development.js" crossorigin></script>
     <script src="./js/umd/react-dom.development.js" crossorigin></script>
-    <script src="./prod/RenderProps.js"> </script>
+    <script src="./prod/RenderProps.js"> </script> -->
+
+
+    <script>
+        var str = "当前值+wg-xs+(1+wg)/1+1+"
+        function validate(str) {
+            var result = "",str = str.replace(/当前值|rk|xs|wg/ig,100)
+            try {
+                result= (new Function('return ' + str))()
+            } catch (err) {
+                result = err
+            }
+            result = Number(result);
+          
+            return Number.isFinite(result) && !Number.isNaN(result)
+        }
+        console.log(validate(str))
+    </script>
 </body>
 
 </html>
