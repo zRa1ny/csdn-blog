@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29. Web Components.html</title>
+    <style>
+        #my>div {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <my-component id="my" data-haha="hahaha">
+        <span slot="my-text">slot</span>
+        <div>qaq</div>
+    </my-component>
+    <template id="MyComponentTemplate">
+        <style>
+            div {
+                color: green;
+            }
+        </style>
+        <i class="desc">
+            <slot name="my-text">default slot</slot>
+        </i>
+        <div>
+            <span>2121</span>
+            haha
+        </div>
+        <slot></slot>
+    </template>
+    <script>
+        class MyComponent extends HTMLElement {
+            constructor() {
+                super();
+                var shadow = this.attachShadow({
+                    mode: 'open'
+                }); // closed
+                var content = document.getElementById('MyComponentTemplate').content.cloneNode(true);
+                shadow.append(content)
+
+            }
+        }
+        window.customElements.define('my-component', MyComponent);
+
+        document.getElementById('my').onclick = function () {
+            console.log('1')
+        }
+        console.log(document.getElementById('my').shadowRoot.querySelector('div'))
+        // document.querySelector('#my div').onclick=function(){
+        //     console.log('2')
+        // }
+    </script>
+</body>
+
+</html>
