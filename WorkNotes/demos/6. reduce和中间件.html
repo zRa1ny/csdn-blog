@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 买食物
+        function buyFood() {
+            return 'original food'
+        }
+        // 处理食材
+        function dealFood(originalFood) {
+            return 'ingredients'
+        }
+        // 烹饪
+        function cookFood(ingredients) {
+            return 'food'
+        }
+        // 喊家人吃饭
+        function callFamily(ingredients) {
+            return 'Family'
+        }
+        // 吃
+        function eat(Family) {}
+
+        function eatMeal(money) {
+            return eat(cookFood(dealFood(buyFood(moeny))))
+        }
+
+        function compose() {
+            var fns = arguments;
+            return Array.prototype.reduce.call(fns, (pre, cur) => {
+                return (arg) => {
+                    return cur(pre(arg))
+                }
+            })
+        }
+
+        function add(num) {
+            var result = num + 1;
+            console.log(result)
+            return result;
+        }
+        var add3Times = compose(add, add, add)
+        console.log(add3Times)
+
+        function chained(...funcs) {
+            if (funcs.length === 0) {
+                return arg => arg
+            }
+
+            if (funcs.length === 1) {
+                return funcs[0]
+            }
+
+            return funcs.reduce(function (a, b) {
+                return (...args) => a(b(...args))
+            })
+        }
+    </script>
+</body>
+
+</html>

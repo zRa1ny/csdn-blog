@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(value,index) in list" :key="index">
+                {{value.name}}
+                =>
+                {{value.scroe}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.5/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.9.1/axios.min.js"></script>
+    <script>
+        // new Vue({
+        //     el: "#app",
+        //     data: {
+        //         list: []
+        //     },
+        //     methods: {
+        //         async load() {
+        // let data = await axios({
+        //     methods: "get",
+        //     url: "./json/list.json"
+        // })
+        //             data = data.data.data;
+        //             data.forEach(async value => {
+        //                 let res = await axios({
+        //                     methods: "get",
+        //                     url: "./json/scroe.json"
+        //                 })
+        //                 this.$set(value,'scroe',res.data.data)
+        //                 // value.scroe = res.data.data;
+        //             })
+        //             this.list = data;
+        //         }
+        //     },
+        //     mounted: function () {
+        //         this.load()
+        //     }
+        // })
+
+        async function A() {
+            console.log("A start")
+            let {
+                data
+            } = await axios({
+                methods: "get",
+                url: "./json/list.json"
+            })
+            console.log(data)
+            console.log("A end")
+        }
+
+        async function B() {
+            console.log("B start")
+            let {
+                data
+            } = await axios({
+                methods: "get",
+                url: "./json/list.json"
+            })
+            console.log(data)
+            console.log("B end")
+        }
+
+
+        function start() {
+            console.log('start')
+            A();
+            B();
+            console.log('end')
+        }
+        // start();
+        Array.prototype.asyncforEach = asyncforEach;
+        async function asyncforEach(pormiseFn) {
+            try {
+                var _this = this,
+                    len = _this.length, //数组的长度
+                    params2 = arguments || window, //参数二
+                    result = [];
+                for (var i = 0; i < len; i++) {
+                    let {
+                        data
+                    } = await pormiseFn.call(params2, _this[i], i, _this); //把Fn函数里边的this指向参数二
+                    result.push(data)
+                }
+                return Promise.resolve(result)
+            } catch (err) {
+                return Promise.reject(err)
+            }
+        }
+
+        async function begin() {
+            let result = await ([{
+                id: 1
+            }, {
+                id: 2
+            }].asyncforEach((value, index) => {
+                return axios({
+                    methods: "get",
+                    url: "./json/list.json?id=" + value.id
+                })
+            }))
+            console.log(result)
+        }
+        // begin()
+
+
+        Array.prototype.mReduce = mReduce;
+
+        function mReduce(callback, initialValue) {
+            let hasInitialValue = initialValue !== undefined;
+            let value = hasInitialValue ? initialValue : tihs[0];
+            for (let index = hasInitialValue ? 0 : 1; index < this.length; index++) {
+                const element = this[index];
+                value = callback(value, element, index, this)
+            }
+            return value
+        }
+
+        async function s() {
+            let data = await [1, 2].mReduce(async (p, c, index) => {
+                console.log(index, 'start', p)
+                let data = await p;
+                console.log(index, 'end', data)
+                return new Promise(resolve => {
+                    let time = index == 0 ? 5000 : 1000;
+                    console.log(index, time)
+                    setTimeout(() => {
+                        console.log(index, time)
+                        resolve(index)
+                    }, time)
+                })
+            }, Promise.resolve(0));
+            console.log('data', data)
+        }
+        s();
+
+        // reduce(Promise.resolve(0) , 1, 0) => async
+        // 产生第一个异步 =》 await 
+        // reduce(reduce(Promise.resolve(0) , 2, 0) , 1, 0) => async
+        // await  reduce(Promise.resolve(0) 
+
+
+        async function test(index) {
+            console.log(index)
+            await new Promise(resolve => {
+                console.log('test1')
+                setTimeout(() => {
+                    console.log(test1)
+                    resolve("index")
+                }, 10)
+            });
+            return new Promise(resolve => {
+                console.log('test2',test1)
+                setTimeout(() => {
+                    console.log(test1)
+                    resolve("index")
+                }, 10000)
+            })
+        };
+        let test1 = test(1);
+        let test2 = test(2);
+        console.log(test1)
+        test1.then(res => {
+            console.log(test1)
+        })
+    </script>
+</body>
+
+</html>
