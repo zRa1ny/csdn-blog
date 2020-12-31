@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <my-component id="my" data-haha="hahaha">
+    <my-component id="my" value="hahaha">
         <span slot="my-text">slot</span>
         <div>qaq</div>
     </my-component>
@@ -41,7 +41,8 @@
                 }); // closed
                 var content = document.getElementById('MyComponentTemplate').content.cloneNode(true);
                 shadow.append(content)
-
+                var value = this.getAttribute('value')
+                console.log(value)
             }
         }
         window.customElements.define('my-component', MyComponent);
@@ -49,7 +50,7 @@
         document.getElementById('my').onclick = function () {
             console.log('1')
         }
-        console.log(document.getElementById('my').shadowRoot.querySelector('div'))
+        
         // document.querySelector('#my div').onclick=function(){
         //     console.log('2')
         // }
